@@ -3,8 +3,7 @@ import json
 from flask import Flask, request
 
 import holehe.core as holehe
-import module
-
+import modules.data_breach as data_breach
 app = Flask(__name__)
 
 
@@ -16,9 +15,15 @@ def hello_world():
 @app.route('/check/breach', methods=['POST'])
 async def check_breach():
     """
-    Check breached account using email.
+    Check breached account using email (cekdata).
     """
-    return 'todo'
+    email = json.loads(request.data)['email']
+    try:
+        out = data_breach.periksa_data(email)
+        return json.dumps(out)
+    except Exception as e:
+        out = {'status': 'error', 'message': str(e)}
+        return json.dumps(out)
 
 
 @app.route('/check/phonenumber', methods=['POST'])
