@@ -1,15 +1,12 @@
 import json
 import os
-from getpass import getpass
 
 from flask import Flask, request, jsonify
-from telethon import TelegramClient, errors
 
 import holehe.core as holehe
 import ignorant.core as ignorant
 import modules.data_breach as data_breach
 import modules.mobile_operator as mobile_operator
-
 import modules.telegram as telegram
 
 app = Flask(__name__)

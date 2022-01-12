@@ -1,10 +1,9 @@
 import os
 
-from dotenv import dotenv_values
+from dotenv import load_dotenv
 from telethon import TelegramClient
 from telethon.tl.functions.contacts import ImportContactsRequest, DeleteContactsRequest
 from telethon.tl.types import InputPhoneContact
-from dotenv import load_dotenv
 
 load_dotenv()
 
