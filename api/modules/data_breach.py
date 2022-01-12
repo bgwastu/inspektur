@@ -9,16 +9,11 @@ def periksa_data(email):
     :return: dict
     """
 
-    # post request
     url = 'https://periksadata.com/'
-    # form data payload
     payload = {
         'email': email,
     }
-    # make request
     response = requests.post(url, data=payload)
-
-    # Scraping
     soup = bs4.BeautifulSoup(response.text, 'html.parser')
 
     info = soup.select_one('.text-center.col-md-6.col-lg-5 > div > h2')

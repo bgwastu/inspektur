@@ -6,3 +6,6 @@ holehe.egg-info
 .idea
 venv
 test_module.py
+*.session
+*.session-journal
+.env

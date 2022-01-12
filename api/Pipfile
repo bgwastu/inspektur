@@ -31,6 +31,8 @@ tqdm = "==4.62.3"
 trio = "==0.19.0"
 Flask = "*"
 async_generator = "==1.10"
+telethon = "*"
+python-dotenv = "*"
 
 [dev-packages]
 autopep8 = "*"
