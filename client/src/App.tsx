@@ -12,11 +12,48 @@ import {
 } from '@mui/material';
 import {Search} from '@mui/icons-material';
 import Header from './components/Header';
+import {useFormik} from 'formik';
+
+interface Values {
+    email: string;
+    phone: string;
+}
 
 function App() {
     const [emailVisibility, setEmailVisibility] = React.useState(true);
     const [phoneVisibility, setPhoneVisibility] = React.useState(true);
     const [isLoading, setIsLoading] = React.useState(false);
+
+    const formik = useFormik({
+        initialValues: {
+            email: '',
+            phone: '',
+        },
+        onSubmit: (values: Values) => {
+            console.log(values);
+        },
+        validate: (values: Values) => {
+            let errors: Partial<Values> = {};
+
+            if (emailVisibility) {
+                if (!values.email) {
+                    errors.email = 'Email tidak boleh kosong';
+                } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+                    errors.email = 'Email tidak valid';
+                }
+            }
+
+            if (phoneVisibility) {
+                if (!values.phone) {
+                    errors.phone = 'Nomor telepon tidak boleh kosong';
+                } else if (!/^[0-9]{10,12}$/i.test(values.phone.toString().replace('+62', ''))) {
+                    errors.phone = 'Nomor telepon tidak valid';
+                }
+            }
+
+            return errors;
+        }
+    });
 
     return (
         <>
@@ -49,31 +86,54 @@ function App() {
                     }}>
                         <FormControlLabel control={
                             <Checkbox
-                                defaultChecked
                                 checked={emailVisibility}
                                 onChange={() => setEmailVisibility(!emailVisibility)}
                             />
                         } label="Email"/>
                         <FormControlLabel control={
                             <Checkbox
-                                defaultChecked
                                 checked={phoneVisibility}
                                 onChange={() => setPhoneVisibility(!phoneVisibility)}
                             />
                         } label="Nomor Telepon"/>
                     </FormGroup>
                     <Box
+                        component="form"
                         display="flex"
                         flexDirection="column"
                         alignItems="stretch"
                         gap={1.5}
+                        onSubmit={formik.handleSubmit}
                     >
-                        <TextField id="outlined-basic" label="Email" variant="outlined" disabled={!emailVisibility}/>
-                        <TextField id="outlined-basic" label="Nomor Telepon" variant="outlined"
-                                   disabled={!phoneVisibility} InputProps={{
-                            startAdornment: <InputAdornment position="start">+62</InputAdornment>,
-                        }}/>
-                        <Button variant="contained" endIcon={<Search/>}>Selidik</Button>
+                        <TextField
+                            id="email"
+                            label="Email"
+                            variant="outlined"
+                            disabled={!emailVisibility}
+                            value={formik.values.email}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            error={emailVisibility && formik.touched.email && Boolean(formik.errors.email)}
+                            helperText={emailVisibility && formik.touched.email && formik.errors.email}
+                        />
+                        <TextField
+                            id="phone"
+                            label="Nomor Telepon"
+                            variant="outlined"
+                            disabled={!phoneVisibility}
+                            type="number"
+                            InputProps={{
+                                startAdornment: <InputAdornment position="start"
+                                >+62</InputAdornment>,
+                            }}
+                            value={formik.values.phone}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            error={phoneVisibility && formik.touched.phone && Boolean(formik.errors.phone)}
+                            helperText={phoneVisibility && formik.touched.phone && formik.errors.phone}
+                        />
+                        <Button type="submit" disabled={!emailVisibility && !phoneVisibility} variant="contained"
+                                endIcon={<Search/>}>Selidik</Button>
                     </Box>
                 </Grid>
             </Grid>
