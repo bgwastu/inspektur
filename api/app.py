@@ -30,7 +30,7 @@ async def check_breach():
         return jsonify(out)
     except Exception as e:
         out = {'status': 'error', 'message': str(e)}
-        return jsonify(out)
+        return jsonify(out), 400
 
 
 @app.route('/check/phonenumber', methods=['POST'])
@@ -45,7 +45,7 @@ async def check_phonenumber():
         # Check if phone number is valid
         if len(number) < 10:
             out = {'status': 'error', 'message': 'Invalid phone number'}
-            return jsonify(out)
+            return jsonify(out), 400
 
         # Get country code
         country_code = '62'
@@ -64,7 +64,7 @@ async def check_phonenumber():
         })
     except Exception as e:
         out = {'status': 'error', 'message': str(e)}
-        return jsonify(out)
+        return jsonify(out), 400
 
 
 @app.route('/check/email', methods=['POST'])
@@ -78,7 +78,7 @@ async def account_check():
         return jsonify(out)
     except Exception as e:
         out = {'status': 'error', 'message': str(e)}
-        return jsonify(out)
+        return jsonify(out), 400
 
 
 if __name__ == '__main__':

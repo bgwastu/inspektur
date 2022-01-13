@@ -31,13 +31,10 @@ def periksa_data(email):
         total_breach = data.select('div.feature__body > p > b')[2].text
 
         breaches.append({
-            'breached': True,
-            'data': [{
-                'title': title,
-                'date': date,
-                'breached_data': breached_data,
-                'total_breach': total_breach
-            }]
+            'title': title,
+            'date': date,
+            'breached_data': breached_data,
+            'total_breach': total_breach
         })
 
     return breaches
