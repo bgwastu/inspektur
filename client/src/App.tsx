@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
     Box,
     Button,
     Checkbox,
-    CssBaseline,
+    CssBaseline, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle,
     FormControlLabel,
     FormGroup,
     Grid,
@@ -14,22 +14,152 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import {Search} from '@mui/icons-material';
 import Header from './components/Header';
 import {useFormik} from 'formik';
+import config from './config';
 
 interface Values {
     email: string;
     phone: string;
 }
 
+interface Telegram {
+    id: number;
+    status: string;
+    username: string;
+    last_online: Date;
+}
+
+interface SocialMediaInfo {
+    name: string;
+    domain: string;
+    method: string;
+    frequent_rate_limit: string;
+    rate_limit: boolean;
+    exists: boolean;
+}
+
+interface PhoneNumberInfo {
+    operator: string;
+    telegram: Telegram;
+    data: SocialMediaInfo[];
+}
+
+interface Error {
+    isError: boolean;
+    message: string[];
+}
+
+interface Breach {
+    title: string;
+    date: string;
+    breached_data: string;
+    total_breach: string;
+}
+
+interface FetchedData {
+    error: string;
+    data: Breach[] | PhoneNumberInfo | SocialMediaInfo[] | string;
+}
+
 function App() {
     const [emailVisibility, setEmailVisibility] = React.useState(true);
     const [phoneVisibility, setPhoneVisibility] = React.useState(true);
     const [isLoading, setIsLoading] = React.useState(false);
+    const [error, setError] = React.useState<Error>({isError: false, message: []});
+    const [isResult, setIsResult] = React.useState(false);
+
+    const [phoneData, setPhoneData] = React.useState<FetchedData>();
+    const [emailData, setEmailData] = React.useState<FetchedData>();
+    const [breachData, setBreachData] = React.useState<FetchedData>();
+
+    useEffect(() => {
+        if (phoneData != null && emailData != null && breachData != null) {
+            setIsResult(true);
+            setIsLoading(false);
+        }
+
+        let err = [];
+        if (phoneData != null && phoneData.error.length > 0) {
+            err.push(phoneData.error);
+        }
+        if (emailData != null && emailData.error.length > 0) {
+            err.push(emailData.error);
+        }
+        if (breachData != null && breachData.error.length > 0) {
+            err.push(breachData.error);
+        }
+
+        setError({isError: err.length > 1, message: err});
+    }, [phoneData, emailData, breachData]);
+
+    function back() {
+        setIsResult(false);
+    }
+
+    function dataBreachCheck(email: string) {
+        fetch(config.API_URL + '/check/breach', {
+            method: 'POST',
+            body: JSON.stringify({
+                email: email,
+            }),
+        })
+            .then((response) => response.json())
+            .then(res => {
+                if (res.status !== undefined) {
+                    setBreachData({data: '', error: res.status});
+                    return;
+                }
+                setBreachData({data: res as Breach[], error: ''});
+            });
+    }
+
+    function phoneNumberCheck(phoneNumber: string) {
+        fetch(config.API_URL + '/check/phonenumber', {
+            method: 'POST',
+            body: JSON.stringify({
+                number: '+62' + phoneNumber,
+            }),
+        })
+            .then((response) => response.json())
+            .then(res => {
+                if (res.status !== undefined) {
+                    setPhoneData({data: '', error: res.status});
+                    return;
+                }
+                setPhoneData({data: res as PhoneNumberInfo, error: ''});
+            });
+    }
+
+    function emailCheck(email: string) {
+        fetch(config.API_URL + '/check/email', {
+            method: 'POST',
+            body: JSON.stringify({
+                email: email,
+            }),
+        }).then((response) => response.json()).then((res) => {
+            if (res.status !== undefined) {
+                setEmailData({data: '', error: res.status});
+                return;
+            }
+            setEmailData({data: res as SocialMediaInfo[], error: ''});
+        });
+    }
 
     function onSubmit(values: Values) {
-        setIsLoading(true);
-        setTimeout(() => {
-            setIsLoading(false);
-        }, 2000);
+        try {
+            setIsLoading(true);
+            if (phoneVisibility) {
+                phoneNumberCheck(values.phone);
+            }
+
+            if (emailVisibility) {
+                emailCheck(values.email);
+                dataBreachCheck(values.email);
+            }
+        } catch (e) {
+            if (e instanceof Error) {
+                setError({isError: true, message: [e.message]});
+            }
+        }
     }
 
     const formik = useFormik({
@@ -149,11 +279,29 @@ function App() {
                                 height: '40px'
                             }}
                         >
-                            Selidik
+                            {isLoading ? 'Mohon tunggu sebentar...' : 'Selidik'}
                         </LoadingButton>
                     </Box>
                 </Grid>
             </Grid>
+            <Dialog
+                open={error.isError}
+                onClose={() => setError({...error, isError: false})}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">
+                    {'Terjadi kesalahan'}
+                </DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        {error.message}
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={() => setError({...error, isError: false})}>Tutup</Button>
+                </DialogActions>
+            </Dialog>
         </>
     );
 }
