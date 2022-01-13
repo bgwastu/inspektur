@@ -8,8 +8,9 @@ import {
     FormGroup,
     Grid,
     InputAdornment,
-    TextField
+    TextField,
 } from '@mui/material';
+import LoadingButton from '@mui/lab/LoadingButton';
 import {Search} from '@mui/icons-material';
 import Header from './components/Header';
 import {useFormik} from 'formik';
@@ -24,14 +25,19 @@ function App() {
     const [phoneVisibility, setPhoneVisibility] = React.useState(true);
     const [isLoading, setIsLoading] = React.useState(false);
 
+    function onSubmit(values: Values) {
+        setIsLoading(true);
+        setTimeout(() => {
+            setIsLoading(false);
+        }, 2000);
+    }
+
     const formik = useFormik({
         initialValues: {
             email: '',
             phone: '',
         },
-        onSubmit: (values: Values) => {
-            console.log(values);
-        },
+        onSubmit: onSubmit,
         validate: (values: Values) => {
             let errors: Partial<Values> = {};
 
@@ -132,8 +138,19 @@ function App() {
                             error={phoneVisibility && formik.touched.phone && Boolean(formik.errors.phone)}
                             helperText={phoneVisibility && formik.touched.phone && formik.errors.phone}
                         />
-                        <Button type="submit" disabled={!emailVisibility && !phoneVisibility} variant="contained"
-                                endIcon={<Search/>}>Selidik</Button>
+                        <LoadingButton
+                            type="submit"
+                            loading={isLoading}
+                            disabled={!emailVisibility && !phoneVisibility}
+                            variant="contained"
+                            loadingPosition="end"
+                            endIcon={<Search/>}
+                            sx={{
+                                height: '40px'
+                            }}
+                        >
+                            Selidik
+                        </LoadingButton>
                     </Box>
                 </Grid>
             </Grid>
