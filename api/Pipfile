@@ -33,6 +33,7 @@ Flask = "*"
 async_generator = "==1.10"
 telethon = "*"
 python-dotenv = "*"
+flask-cors = "*"
 
 [dev-packages]
 autopep8 = "*"

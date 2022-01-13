@@ -8,8 +8,10 @@ import ignorant.core as ignorant
 import modules.data_breach as data_breach
 import modules.mobile_operator as mobile_operator
 import modules.telegram as telegram
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 
 @app.route('/')
@@ -81,4 +83,5 @@ async def account_check():
 
 if __name__ == '__main__':
     app.config['JSON_SORT_KEYS'] = False
+    app.config['CORS_HEADERS'] = 'Content-Type'
     app.run(debug=os.environ.get('IS_DEBUG', False), host=os.environ.get('HOST'))
