@@ -13,7 +13,7 @@ def periksa_data(email):
     payload = {
         'email': email,
     }
-    response = requests.post(url, data=payload)
+    response = requests.post(url, data=payload, verify=False)
     soup = bs4.BeautifulSoup(response.text, 'html.parser')
 
     info = soup.select_one('.text-center.col-md-6.col-lg-5 > div > h2')

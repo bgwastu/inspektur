@@ -57,7 +57,6 @@ async def check_phonenumber():
         telegram_info = await telegram.get_info(number)
 
         return ({
-            'status': 'success',
             'operator': operator,
             **telegram_info,
             'data': out
