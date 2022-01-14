@@ -24,12 +24,12 @@ function App() {
     });
 
     function onSubmit(payload: Payload, emailVisibility: boolean, phoneVisibility: boolean) {
-        if(payload.email === '' || !emailVisibility){
+        if (payload.email === '' || !emailVisibility) {
             payload.email = null;
         }
 
         let phone: string | null = '+62' + payload.phone;
-        if(payload.phone === '' || !phoneVisibility){
+        if (payload.phone === '' || !phoneVisibility) {
             phone = null;
         }
 
@@ -102,10 +102,11 @@ function App() {
                     gap={1}
                 >
                     <Header/>
-                    {state.isFinished && state.response? <Result goBack={goBack} data={state.response}/> : <MainForm onSubmit={onSubmit} state={state}/>}
+                    {state.isFinished && state.response ? <Result goBack={goBack} data={state.response}/> :
+                        <MainForm onSubmit={onSubmit} state={state}/>}
                 </Grid>
             </Grid>
-            <ErrorDialog setState={setState} state={state} />
+            <ErrorDialog setState={setState} state={state}/>
         </>
     );
 }
