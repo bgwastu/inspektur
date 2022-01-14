@@ -5,6 +5,11 @@
     "ADD /api /app",
     "WORKDIR /app",
     "RUN pip install -r requirements.txt",
+    "ENV TELEGRAM_API_ID=${TELEGRAM_API_ID}",
+    "ENV TELEGRAM_API_HASH=${TELEGRAM_API_HASH}",
+    "ENV TELEGRAM_PHONE_NUMBER=${TELEGRAM_PHONE_NUMBER}",
+    "ENV IS_DEBUG=False",
+    "ENV HOST 0.0.0.0",
     "EXPOSE 5000",
     "CMD [\"python\", \"app.py\"]"
   ]
