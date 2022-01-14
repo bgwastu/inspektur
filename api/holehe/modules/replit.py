@@ -4,7 +4,7 @@ from holehe.localuseragent import ua
 
 
 async def replit(email, client, out):
-    name = "replit"
+    name = "Replit"
     domain = "replit.com"
     method = "register"
     frequent_rate_limit=True

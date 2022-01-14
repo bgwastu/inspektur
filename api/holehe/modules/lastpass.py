@@ -4,7 +4,7 @@ from holehe.localuseragent import ua
 
 
 async def lastpass(email, client, out):
-    name = "lastpass"
+    name = "LastPass"
     domain = "lastpass.com"
     method = "register"
     frequent_rate_limit=False

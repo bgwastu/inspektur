@@ -4,7 +4,7 @@ from holehe.localuseragent import ua
 
 
 async def docker(email, client, out):
-    name = "docker"
+    name = "Docker"
     domain = "docker.com"
     method = "register"
     frequent_rate_limit = False

@@ -1,6 +1,6 @@
 async def protonmail(email, client, out):
     #credit https://github.com/pixelbubble/ProtOSINT
-    name = "protonmail"
+    name = "Protonmail"
     domain = "protonmail.ch"
     method= "other"
     frequent_rate_limit=False

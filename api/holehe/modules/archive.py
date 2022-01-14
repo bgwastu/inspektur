@@ -4,7 +4,7 @@ from holehe.localuseragent import ua
 
 
 async def archive(email, client, out):
-    name = "archive"
+    name = "Archive"
     domain = "archive.org"
     method = "register"
     frequent_rate_limit = False

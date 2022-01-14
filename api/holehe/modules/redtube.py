@@ -6,7 +6,7 @@ from holehe.localuseragent import ua
 
 
 async def redtube(email, client, out):
-    name = "redtube"
+    name = "Redtube"
     domain = "redtube.com"
     method= "register"
     frequent_rate_limit=False

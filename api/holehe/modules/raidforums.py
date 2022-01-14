@@ -4,7 +4,7 @@ from holehe.localuseragent import ua
 
 
 async def raidforums(email, client, out):
-    name = "raidforums"
+    name = "Raidforums"
     domain = "raidforums.com"
     method= "register"
     frequent_rate_limit=True

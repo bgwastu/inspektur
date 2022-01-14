@@ -2,7 +2,7 @@ import re
 
 
 async def github(email, client, out):
-    name = "github"
+    name = "GitHub"
     domain = "github.com"
     method = "register"
     frequent_rate_limit=False

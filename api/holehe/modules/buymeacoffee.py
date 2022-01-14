@@ -7,7 +7,7 @@ from holehe.localuseragent import ua
 
 
 async def buymeacoffee(email, client, out):
-    name = "buymeacoffee"
+    name = "Buy Me a Coffee"
     domain = "buymeacoffee.com"
     method = "register"
     frequent_rate_limit = True

@@ -4,7 +4,7 @@ from holehe.localuseragent import ua
 
 
 async def google(email, client, out):
-    name = "google"
+    name = "Google"
     domain = "google.com"
     method= "register"
     frequent_rate_limit=False

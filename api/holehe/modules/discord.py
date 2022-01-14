@@ -4,7 +4,7 @@ from holehe.localuseragent import ua
 
 
 async def discord(email, client, out):
-    name = "discord"
+    name = "Discord"
     domain = "discord.com"
     method = "register"
     frequent_rate_limit = False

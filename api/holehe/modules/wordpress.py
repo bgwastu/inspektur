@@ -4,7 +4,7 @@ from holehe.localuseragent import ua
 
 
 async def wordpress(email, client, out):
-    name = "wordpress"
+    name = "Wordpress"
     domain = "wordpress.com"
     method= "login"
     frequent_rate_limit=False

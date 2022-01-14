@@ -4,7 +4,7 @@ from holehe.localuseragent import ua
 
 
 async def instagram(email, client, out):
-    name = "instagram"
+    name = "Instagram"
     domain = "instagram.com"
     method = "register"
     frequent_rate_limit=True

@@ -4,7 +4,7 @@ from holehe.localuseragent import ua
 
 
 async def aboutme(email, client, out):
-    name = "aboutme"
+    name = "About Me"
     domain = "about.me"
     method = "register"
     frequent_rate_limit = False

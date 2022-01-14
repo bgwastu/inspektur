@@ -4,7 +4,7 @@ from holehe.localuseragent import ua
 
 
 async def smule(email, client, out):
-    name = "smule"
+    name = "Smule"
     domain = "smule.com"
     method= "register"
     frequent_rate_limit=True

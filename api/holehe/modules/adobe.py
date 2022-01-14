@@ -4,7 +4,7 @@ from holehe.localuseragent import ua
 
 
 async def adobe(email, client, out):
-    name = "adobe"
+    name = "Adobe"
     domain = "adobe.com"
     method = "password recovery"
     frequent_rate_limit=False

@@ -4,7 +4,7 @@ from holehe.localuseragent import ua
 
 
 async def patreon(email, client, out):
-    name = "patreon"
+    name = "Patreon"
     domain = "patreon.com"
     method = "login"
     frequent_rate_limit=True

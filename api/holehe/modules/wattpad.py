@@ -4,7 +4,7 @@ from holehe.localuseragent import ua
 
 
 async def wattpad(email, client, out):
-    name = "wattpad"
+    name = "Wattpad"
     domain = "wattpad.com"
     method = "register"
     frequent_rate_limit=True

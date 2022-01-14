@@ -6,7 +6,7 @@ from holehe.localuseragent import ua
 
 
 async def soundcloud(email, client, out):
-    name = "soundcloud"
+    name = "SoundCloud"
     domain = "soundcloud.com"
     method= "register"
     frequent_rate_limit=False

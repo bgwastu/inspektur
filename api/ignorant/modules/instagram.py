@@ -27,7 +27,7 @@ def generate_data(phone_number_raw):
 
 
 async def instagram(phone, country_code, client, out):
-    name = "instagram"
+    name = "Instagram"
     domain = "instagram.com"
     method = "other"
     frequent_rate_limit = False

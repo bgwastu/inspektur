@@ -4,7 +4,7 @@ from holehe.localuseragent import ua
 
 
 async def tumblr(email, client, out):
-    name = "tumblr"
+    name = "Tumblr"
     domain = "tumblr.com"
     method = "register"
     frequent_rate_limit=False

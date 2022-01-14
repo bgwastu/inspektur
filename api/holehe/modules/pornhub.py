@@ -6,7 +6,7 @@ from holehe.localuseragent import ua
 
 
 async def pornhub(email, client, out):
-    name = "pornhub"
+    name = "Pornhub"
     domain = "pornhub.com"
     method = "register"
     frequent_rate_limit = False

@@ -4,7 +4,7 @@ from holehe.localuseragent import ua
 
 
 async def spotify(email, client, out):
-    name = "spotify"
+    name = "Spotify"
     domain = "spotify.com"
     method= "register"
     frequent_rate_limit=True

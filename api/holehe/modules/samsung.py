@@ -4,7 +4,7 @@ from holehe.localuseragent import ua
 
 
 async def samsung(email, client, out):
-    name = "samsung"
+    name = "Samsung"
     domain = "samsung.com"
     method = "register"
     frequent_rate_limit=False

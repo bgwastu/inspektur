@@ -6,7 +6,7 @@ from holehe.localuseragent import ua
 
 
 async def codepen(email, client, out):
-    name = "codepen"
+    name = "Codepen"
     domain = "codepen.io"
     method = "register"
     frequent_rate_limit = False

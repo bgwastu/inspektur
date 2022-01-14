@@ -1,5 +1,5 @@
 async def twitter(email, client, out):
-    name = "twitter"
+    name = "Twitter"
     domain = "twitter.com"
     method = "register"
     frequent_rate_limit=False

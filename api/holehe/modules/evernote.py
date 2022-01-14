@@ -4,7 +4,7 @@ from holehe.localuseragent import ua
 
 
 async def evernote(email, client, out):
-    name = "evernote"
+    name = "Evernote"
     domain = "evernote.com"
     method = "login"
     frequent_rate_limit=False

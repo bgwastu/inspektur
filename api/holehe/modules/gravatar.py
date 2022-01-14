@@ -2,7 +2,7 @@ import hashlib
 
 
 async def gravatar(email, client, out):
-    name = "gravatar"
+    name = "Gravatar"
     domain = "en.gravatar.com"
     method="other"
     frequent_rate_limit=False

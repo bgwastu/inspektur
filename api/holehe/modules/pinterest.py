@@ -1,5 +1,5 @@
 async def pinterest(email, client, out):
-    name = "pinterest"
+    name = "Pinterest"
     domain = "pinterest.com"
     method = "register"
     frequent_rate_limit=False

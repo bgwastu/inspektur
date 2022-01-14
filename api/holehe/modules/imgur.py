@@ -4,7 +4,7 @@ from holehe.localuseragent import ua
 
 
 async def imgur(email, client, out):
-    name = "imgur"
+    name = "Imgur"
     domain = "imgur.com"
     method = "register"
     frequent_rate_limit=True

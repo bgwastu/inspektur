@@ -4,7 +4,7 @@ from holehe.localuseragent import ua
 
 
 async def anydo(email, client, out):
-    name = "anydo"
+    name = "Any.do"
     domain = "any.do"
     method= "login"
     frequent_rate_limit=True

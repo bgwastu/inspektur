@@ -4,7 +4,7 @@ from holehe.localuseragent import ua
 
 
 async def quora(email, client, out):
-    name = "quora"
+    name = "Quora"
     domain = "quora.com"
     method= "register"
     frequent_rate_limit=False

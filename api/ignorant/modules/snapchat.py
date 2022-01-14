@@ -4,7 +4,7 @@ from holehe.localuseragent import ua
 
 
 async def snapchat(phone, country_code, client, out):
-    name = "snapchat"
+    name = "Snapchat"
     domain = "snapchat.com"
     method = "register"
     frequent_rate_limit=False

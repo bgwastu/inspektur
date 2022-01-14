@@ -5,7 +5,7 @@ from holehe.localuseragent import ua
 
 
 async def amazon(email, client, out):
-    name = "amazon"
+    name = "Amazon"
     domain = "amazon.com"
     method = "login"
     frequent_rate_limit = False

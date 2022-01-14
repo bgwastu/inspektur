@@ -4,7 +4,7 @@ from holehe.localuseragent import ua
 
 
 async def ebay(email, client, out):
-    name = "ebay"
+    name = "Ebay"
     domain = "ebay.com"
     method = "login"
     frequent_rate_limit=True

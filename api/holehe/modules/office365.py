@@ -3,7 +3,7 @@ import string
 
 
 async def office365(email, client, out):
-    name = "office365"
+    name = "Office365"
     domain = "office365.com"
     method = "other"
     frequent_rate_limit=False

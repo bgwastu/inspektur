@@ -2,7 +2,7 @@ import json
 
 
 async def tokopedia(email, client, out):
-    name = "tokopedia"
+    name = "Tokopedia"
     domain = "tokopedia.com"
     method = "login"
     frequent_rate_limit = False

@@ -4,7 +4,7 @@ from holehe.localuseragent import ua
 
 
 async def yahoo(email, client, out):
-    name = "yahoo"
+    name = "Yahoo"
     domain = "yahoo.com"
     method= "login"
     frequent_rate_limit=True

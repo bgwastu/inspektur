@@ -1,5 +1,5 @@
 async def firefox(email, client, out):
-    name = "firefox"
+    name = "Firefox"
     domain = "firefox.com"
     method = "register"
     frequent_rate_limit=False
