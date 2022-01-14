@@ -33,8 +33,14 @@ async def check():
                 out = {'status': 'error', 'message': 'Invalid email address'}
                 return jsonify(out), 400
 
-            out['email'] = holehe.find_all(email)
-            out['breach'] = data_breach.periksa_data(email)
+            email_data = holehe.find_all(email)
+
+            if len(email_data) > 0:
+                out['email'] = email_data
+            breach_data = data_breach.periksa_data(email)
+
+            if breach_data is not None:
+                out['breach'] = breach_data
 
         if number is not None:
             # Check phone number
@@ -45,11 +51,17 @@ async def check():
             operator = mobile_operator.check_mobile_operator(number)
             datas = ignorant.find_all(number.replace('+62', ''), '62')
 
-            out['telegram'] = await telegram.get_info(number)
-            out['phone_number'] = ({
+            telegram_data = await telegram.get_info(number)
+            if telegram_data:
+                out['telegram'] = telegram_data
+
+            phone_data = ({
                 'operator': operator,
                 'datas': datas
             })
+
+            if len(phone_data['datas']) > 1:
+                out['phone_number'] = phone_data
 
         return jsonify(out), 200
 

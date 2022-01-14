@@ -24,8 +24,10 @@ async def get_info(phone_number):
             contacts = await client(ImportContactsRequest([contact]))
             data = contacts.to_dict()['users'][0]
 
+            user = contacts.users[0]
+
             last_seen = None
-            if data['status']['was_online']:
+            if hasattr(user.status, 'was_online'):
                 last_seen = data['status']['was_online'].isoformat()
 
             data = {
@@ -38,10 +40,6 @@ async def get_info(phone_number):
             await client(DeleteContactsRequest(id=[contacts.users[0]]))
             return data
         except IndexError:
-            return {
-                'telegram': None
-            }
+            return None
         except TypeError:
-            return {
-                'telegram': None
-            }
+            return None
