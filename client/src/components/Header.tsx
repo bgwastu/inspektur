@@ -1,7 +1,7 @@
 import React from 'react';
 import {Box, Tooltip, Typography} from '@mui/material';
 
-const logo = require('../logo.webp');
+const logo = require('../assets/logo.webp');
 
 export default function Header() {
     return <Box
