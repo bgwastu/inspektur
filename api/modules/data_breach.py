@@ -25,12 +25,14 @@ def periksa_data(email):
     breaches = []
     list = soup.select('div.col-md-6')
     for data in list:
+        img = data.select_one('div > div > img').attrs['src']
         title = data.select_one('div.feature__body > h5').text
         date = data.select_one('div.feature__body > p > b').text
         breached_data = data.select('div.feature__body > p > b')[1].text
         total_breach = data.select('div.feature__body > p > b')[2].text
 
         breaches.append({
+            'img': img,
             'title': title,
             'date': date,
             'breached_data': breached_data,
