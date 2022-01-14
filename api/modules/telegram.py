@@ -29,12 +29,10 @@ async def get_info(phone_number):
                 last_seen = data['status']['was_online'].isoformat()
 
             data = {
-                'telegram': {
-                    'id': data['id'],
-                    'status': data['status']['_'],
-                    'username': data['username'],
-                    'last_online': last_seen,
-                }
+                'id': data['id'],
+                'status': data['status']['_'],
+                'username': data['username'],
+                'last_online': last_seen,
             }
 
             await client(DeleteContactsRequest(id=[contacts.users[0]]))
