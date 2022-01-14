@@ -19,7 +19,7 @@ def periksa_data(email):
     info = soup.select_one('.text-center.col-md-6.col-lg-5 > div > h2')
     if info is not None:
         if info.text == 'WAH SELAMAT!':
-            return {'breached': False, 'data': []}
+            return
 
     # Get data
     breaches = []
