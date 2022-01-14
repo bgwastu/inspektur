@@ -1,0 +1,9 @@
+services:
+  api:
+    build: /api
+    ports:
+      - 5000:5000
+  client:
+    build: /client
+    ports:
+      - 3000:3000
