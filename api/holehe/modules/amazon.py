@@ -22,22 +22,22 @@ async def amazon(email, client, out):
         body = BeautifulSoup(req.text, 'html.parser')
         if body.find("div", {"id": "auth-password-missing-alert"}):
             out.append({"name": name, "domain": domain, "method": method, "frequent_rate_limit": frequent_rate_limit,
-                        "rateLimit": False,
+                        "rate_limit": False,
                         "exists": True,
-                        "emailrecovery": None,
-                        "phoneNumber": None,
+                        "email_recovery": None,
+                        "phone_number": None,
                         "others": None})
         else:
             out.append({"name": name, "domain": domain, "method": method, "frequent_rate_limit": frequent_rate_limit,
-                        "rateLimit": False,
+                        "rate_limit": False,
                         "exists": False,
-                        "emailrecovery": None,
-                        "phoneNumber": None,
+                        "email_recovery": None,
+                        "phone_number": None,
                         "others": None})
     except:
         out.append({"name": name, "domain": domain, "method": method, "frequent_rate_limit": frequent_rate_limit,
-                    "rateLimit": True,
+                    "rate_limit": True,
                     "exists": False,
-                    "emailrecovery": None,
-                    "phoneNumber": None,
+                    "email_recovery": None,
+                    "phone_number": None,
                     "others": None})

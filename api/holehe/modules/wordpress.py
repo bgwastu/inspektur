@@ -34,39 +34,39 @@ async def wordpress(email, client, out):
         response = await client.get('https://public-api.wordpress.com/rest/v1.1/users/' + email + '/auth-options', headers=headers, params=params, cookies=cookies)
     except BaseException:
         out.append({"name": name,"domain":domain,"method":method,"frequent_rate_limit":frequent_rate_limit,
-                    "rateLimit": True,
+                    "rate_limit": True,
                     "exists": False,
-                    "emailrecovery": None,
-                    "phoneNumber": None,
+                    "email_recovery": None,
+                    "phone_number": None,
                     "others": None})
         return None
     info = response.json()
     if "email_verified" in info["body"].keys():
         if info["body"]["email_verified"]:
             out.append({"name": name,"domain":domain,"method":method,"frequent_rate_limit":frequent_rate_limit,
-                        "rateLimit": False,
+                        "rate_limit": False,
                         "exists": True,
-                        "emailrecovery": None,
-                        "phoneNumber": None,
+                        "email_recovery": None,
+                        "phone_number": None,
                         "others": None})
         else:
             out.append({"name": name,"domain":domain,"method":method,"frequent_rate_limit":frequent_rate_limit,
-                        "rateLimit": False,
+                        "rate_limit": False,
                         "exists": False,
-                        "emailrecovery": None,
-                        "phoneNumber": None,
+                        "email_recovery": None,
+                        "phone_number": None,
                         "others": None})
     elif "unknown_user" in str(info) or "email_login_not_allowed" in str(info):
         out.append({"name": name,"domain":domain,"method":method,"frequent_rate_limit":frequent_rate_limit,
-                    "rateLimit": False,
+                    "rate_limit": False,
                     "exists": False,
-                    "emailrecovery": None,
-                    "phoneNumber": None,
+                    "email_recovery": None,
+                    "phone_number": None,
                     "others": None})
     else:
         out.append({"name": name,"domain":domain,"method":method,"frequent_rate_limit":frequent_rate_limit,
-                    "rateLimit": True,
+                    "rate_limit": True,
                     "exists": False,
-                    "emailrecovery": None,
-                    "phoneNumber": None,
+                    "email_recovery": None,
+                    "phone_number": None,
                     "others": None})

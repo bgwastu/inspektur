@@ -26,17 +26,17 @@ async def tokopedia(email, client, out):
         data = res.json()
         is_exist = data['data']['registerCheck']['isExist']
         out.append({"name": name, "domain": domain, "method": method, "frequent_rate_limit": frequent_rate_limit,
-                    "rateLimit": False,
+                    "rate_limit": False,
                     "exists": bool(is_exist),
-                    "emailrecovery": None,
-                    "phoneNumber": None,
+                    "email_recovery": None,
+                    "phone_number": None,
                     "others": None})
         return None
     except BaseException:
         out.append({"name": name, "domain": domain, "method": method, "frequent_rate_limit": frequent_rate_limit,
-                    "rateLimit": True,
+                    "rate_limit": True,
                     "exists": False,
-                    "emailrecovery": None,
-                    "phoneNumber": None,
+                    "email_recovery": None,
+                    "phone_number": None,
                     "others": None})
         return None

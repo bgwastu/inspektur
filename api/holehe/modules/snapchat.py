@@ -30,22 +30,22 @@ async def snapchat(email, client, out):
         if response.status_code != 204:
             data = response.json()
             out.append({"name": name,"domain":domain,"method":method,"frequent_rate_limit":frequent_rate_limit,
-                        "rateLimit": False,
+                        "rate_limit": False,
                         "exists": data["hasSnapchat"],
-                        "emailrecovery": None,
-                        "phoneNumber": None,
+                        "email_recovery": None,
+                        "phone_number": None,
                         "others": None})
             return None
         out.append({"name": name,"domain":domain,"method":method,"frequent_rate_limit":frequent_rate_limit,
-                    "rateLimit": False,
+                    "rate_limit": False,
                     "exists": False,
-                    "emailrecovery": None,
-                    "phoneNumber": None,
+                    "email_recovery": None,
+                    "phone_number": None,
                     "others": None})
     except BaseException:
         out.append({"name": name,"domain":domain,"method":method,"frequent_rate_limit":frequent_rate_limit,
-                    "rateLimit": True,
+                    "rate_limit": True,
                     "exists": False,
-                    "emailrecovery": None,
-                    "phoneNumber": None,
+                    "email_recovery": None,
+                    "phone_number": None,
                     "others": None})

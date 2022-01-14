@@ -26,15 +26,15 @@ async def soundcloud(email, client, out):
     Json = json.loads(API.text)
     if Json['status'] == 'available' or 'in_use':
         out.append({"name": name,"domain":domain,"method":method,"frequent_rate_limit":frequent_rate_limit,
-                        "rateLimit": False,
+                        "rate_limit": False,
                         "exists": True if Json['status'] == 'in_use' else False,
-                        "emailrecovery": None,
-                        "phoneNumber": None,
+                        "email_recovery": None,
+                        "phone_number": None,
                         "others": None})
     else:
         out.append({"name": name,"domain":domain,"method":method,"frequent_rate_limit":frequent_rate_limit,
-                        "rateLimit": True,
+                        "rate_limit": True,
                         "exists": False,
-                        "emailrecovery": None,
-                        "phoneNumber": None,
+                        "email_recovery": None,
+                        "phone_number": None,
                         "others": None})

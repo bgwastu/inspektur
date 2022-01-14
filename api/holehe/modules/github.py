@@ -15,29 +15,29 @@ async def github(email, client, out):
     req = await client.post("https://github.com/signup_check/email", data=data)
     if "Your browser did something unexpected." in req.text:
         out.append({"name": name,"domain":domain,"method":method,"frequent_rate_limit":frequent_rate_limit,
-                    "rateLimit": True,
+                    "rate_limit": True,
                     "exists": None,
-                    "emailrecovery": None,
-                    "phoneNumber": None,
+                    "email_recovery": None,
+                    "phone_number": None,
                     "others": None})
     elif req.status_code == 422:
         out.append({"name": name,"domain":domain,"method":method,"frequent_rate_limit":frequent_rate_limit,
-                    "rateLimit": False,
+                    "rate_limit": False,
                     "exists": True,
-                    "emailrecovery": None,
-                    "phoneNumber": None,
+                    "email_recovery": None,
+                    "phone_number": None,
                     "others": None})
     elif req.status_code == 200:
         out.append({"name": name,"domain":domain,"method":method,"frequent_rate_limit":frequent_rate_limit,
-                    "rateLimit": False,
+                    "rate_limit": False,
                     "exists": False,
-                    "emailrecovery": None,
-                    "phoneNumber": None,
+                    "email_recovery": None,
+                    "phone_number": None,
                     "others": None})
     else:
         out.append({"name": name,"domain":domain,"method":method,"frequent_rate_limit":frequent_rate_limit,
-                    "rateLimit": True,
+                    "rate_limit": True,
                     "exists": None,
-                    "emailrecovery": None,
-                    "phoneNumber": None,
+                    "email_recovery": None,
+                    "phone_number": None,
                     "others": None})

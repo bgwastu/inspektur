@@ -22,10 +22,10 @@ async def wattpad(email, client, out):
         await client.get("https://www.wattpad.com", headers=headers)
     except BaseException:
         out.append({"name": name,"domain":domain,"method":method,"frequent_rate_limit":frequent_rate_limit,
-                    "rateLimit": True,
+                    "rate_limit": True,
                     "exists": False,
-                    "emailrecovery": None,
-                    "phoneNumber": None,
+                    "email_recovery": None,
+                    "phone_number": None,
                     "others": None})
         return None
     headers["X-Requested-With"] = 'XMLHttpRequest'
@@ -36,22 +36,22 @@ async def wattpad(email, client, out):
     if (response.status_code == 200 or response.status_code == 400):
         if "Cette adresse" not in response.text or response.text == '{"message":"OK","code":200}':
             out.append({"name": name,"domain":domain,"method":method,"frequent_rate_limit":frequent_rate_limit,
-                        "rateLimit": False,
+                        "rate_limit": False,
                         "exists": False,
-                        "emailrecovery": None,
-                        "phoneNumber": None,
+                        "email_recovery": None,
+                        "phone_number": None,
                         "others": None})
         else:
             out.append({"name": name,"domain":domain,"method":method,"frequent_rate_limit":frequent_rate_limit,
-                        "rateLimit": False,
+                        "rate_limit": False,
                         "exists": True,
-                        "emailrecovery": None,
-                        "phoneNumber": None,
+                        "email_recovery": None,
+                        "phone_number": None,
                         "others": None})
     else:
         out.append({"name": name,"domain":domain,"method":method,"frequent_rate_limit":frequent_rate_limit,
-                    "rateLimit": True,
+                    "rate_limit": True,
                     "exists": False,
-                    "emailrecovery": None,
-                    "phoneNumber": None,
+                    "email_recovery": None,
+                    "phone_number": None,
                     "others": None})

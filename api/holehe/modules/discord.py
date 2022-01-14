@@ -40,45 +40,45 @@ async def discord(email, client, out):
                 if responseData["errors"]["email"]["_errors"][0]['code'] == "EMAIL_ALREADY_REGISTERED":
                     out.append(
                         {"name": name, "domain": domain, "method": method, "frequent_rate_limit": frequent_rate_limit,
-                         "rateLimit": False,
+                         "rate_limit": False,
                          "exists": True,
-                         "emailrecovery": None,
-                         "phoneNumber": None,
+                         "email_recovery": None,
+                         "phone_number": None,
                          "others": None})
                 else:
                     out.append(
                         {"name": name, "domain": domain, "method": method, "frequent_rate_limit": frequent_rate_limit,
-                         "rateLimit": False,
+                         "rate_limit": False,
                          "exists": False,
-                         "emailrecovery": None,
-                         "phoneNumber": None,
+                         "email_recovery": None,
+                         "phone_number": None,
                          "others": None})
             except BaseException:
                 out.append(
                     {"name": name, "domain": domain, "method": method, "frequent_rate_limit": frequent_rate_limit,
-                     "rateLimit": True,
+                     "rate_limit": True,
                      "exists": False,
-                     "emailrecovery": None,
-                     "phoneNumber": None,
+                     "email_recovery": None,
+                     "phone_number": None,
                      "others": None})
         elif responseData["captcha_key"][0] == "captcha-required":
             out.append({"name": name, "domain": domain, "method": method, "frequent_rate_limit": frequent_rate_limit,
-                        "rateLimit": False,
+                        "rate_limit": False,
                         "exists": False,
-                        "emailrecovery": None,
-                        "phoneNumber": None,
+                        "email_recovery": None,
+                        "phone_number": None,
                         "others": None})
         else:
             out.append({"name": name, "domain": domain, "method": method, "frequent_rate_limit": frequent_rate_limit,
-                        "rateLimit": True,
+                        "rate_limit": True,
                         "exists": False,
-                        "emailrecovery": None,
-                        "phoneNumber": None,
+                        "email_recovery": None,
+                        "phone_number": None,
                         "others": None})
     except BaseException:
         out.append({"name": name, "domain": domain, "method": method, "frequent_rate_limit": frequent_rate_limit,
-                    "rateLimit": True,
+                    "rate_limit": True,
                     "exists": False,
-                    "emailrecovery": None,
-                    "phoneNumber": None,
+                    "email_recovery": None,
+                    "phone_number": None,
                     "others": None})

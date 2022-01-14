@@ -8,8 +8,8 @@ from holehe.localuseragent import ua
 async def pornhub(email, client, out):
     name = "pornhub"
     domain = "pornhub.com"
-    method= "register"
-    frequent_rate_limit=False
+    method = "register"
+    frequent_rate_limit = False
 
     headers = {
         'User-Agent': random.choice(ua["browsers"]["chrome"]),
@@ -22,22 +22,22 @@ async def pornhub(email, client, out):
     try:
         req = await client.get("https://www.pornhub.com/signup", headers=headers)
     except BaseException:
-        out.append({"name": name,"domain":domain,"method":method,"frequent_rate_limit":frequent_rate_limit,
-                    "rateLimit": True,
+        out.append({"name": name, "domain": domain, "method": method, "frequent_rate_limit": frequent_rate_limit,
+                    "rate_limit": True,
                     "exists": False,
-                    "emailrecovery": None,
-                    "phoneNumber": None,
+                    "email_recovery": None,
+                    "phone_number": None,
                     "others": None})
         return None
     soup = BeautifulSoup(req.content, features="html.parser")
     try:
         toe = soup.find(attrs={"name": "token"}).get("value")
     except BaseException:
-        out.append({"name": name,"domain":domain,"method":method,"frequent_rate_limit":frequent_rate_limit,
-                    "rateLimit": True,
+        out.append({"name": name, "domain": domain, "method": method, "frequent_rate_limit": frequent_rate_limit,
+                    "rate_limit": True,
                     "exists": False,
-                    "emailrecovery": None,
-                    "phoneNumber": None,
+                    "email_recovery": None,
+                    "phone_number": None,
                     "others": None})
         return None
 
@@ -57,23 +57,23 @@ async def pornhub(email, client, out):
         data=data)
     try:
         if response.json()["error_message"] == "Email has been taken.":
-            out.append({"name": name,"domain":domain,"method":method,"frequent_rate_limit":frequent_rate_limit,
-                        "rateLimit": False,
+            out.append({"name": name, "domain": domain, "method": method, "frequent_rate_limit": frequent_rate_limit,
+                        "rate_limit": False,
                         "exists": True,
-                        "emailrecovery": None,
-                        "phoneNumber": None,
+                        "email_recovery": None,
+                        "phone_number": None,
                         "others": None})
         else:
-            out.append({"name": name,"domain":domain,"method":method,"frequent_rate_limit":frequent_rate_limit,
-                        "rateLimit": False,
+            out.append({"name": name, "domain": domain, "method": method, "frequent_rate_limit": frequent_rate_limit,
+                        "rate_limit": False,
                         "exists": False,
-                        "emailrecovery": None,
-                        "phoneNumber": None,
+                        "email_recovery": None,
+                        "phone_number": None,
                         "others": None})
     except BaseException:
-        out.append({"name": name,"domain":domain,"method":method,"frequent_rate_limit":frequent_rate_limit,
-                    "rateLimit": True,
+        out.append({"name": name, "domain": domain, "method": method, "frequent_rate_limit": frequent_rate_limit,
+                    "rate_limit": True,
                     "exists": False,
-                    "emailrecovery": None,
-                    "phoneNumber": None,
+                    "email_recovery": None,
+                    "phone_number": None,
                     "others": None})

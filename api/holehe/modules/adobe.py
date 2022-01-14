@@ -29,10 +29,10 @@ async def adobe(email, client, out):
         r = r.json()
         if "errorCode" in str(r.keys()):
             out.append({"name": name,"domain":domain,"method":method,"frequent_rate_limit":frequent_rate_limit,
-                        "rateLimit": False,
+                        "rate_limit": False,
                         "exists": False,
-                        "emailrecovery": None,
-                        "phoneNumber": None,
+                        "email_recovery": None,
+                        "phone_number": None,
                         "others": None})
             return None
         headers['X-IMS-Authentication-State'] = r['id']
@@ -45,15 +45,15 @@ async def adobe(email, client, out):
             params=params)
         response=response.json()
         out.append({"name": name,"domain":domain,"method":method,"frequent_rate_limit":frequent_rate_limit,
-                    "rateLimit": False,
+                    "rate_limit": False,
                     "exists": True,
-                    "emailrecovery": response['secondaryEmail'],
-                    "phoneNumber": response['securityPhoneNumber'],
+                    "email_recovery": response['secondaryEmail'],
+                    "phone_number": response['securityphone_number'],
                     "others": None})
     except:
         out.append({"name": name,"domain":domain,"method":method,"frequent_rate_limit":frequent_rate_limit,
-                    "rateLimit": True,
+                    "rate_limit": True,
                     "exists": False,
-                    "emailrecovery": None,
-                    "phoneNumber": None,
+                    "email_recovery": None,
+                    "phone_number": None,
                     "others": None})

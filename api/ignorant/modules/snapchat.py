@@ -25,7 +25,7 @@ async def snapchat(phone, country_code, client, out):
         response = await client.get("https://accounts.snapchat.com", headers=headers)
     except :
         out.append({"name": name,"domain":domain,"method":method,"frequent_rate_limit":frequent_rate_limit,
-                    "rateLimit": True,
+                    "rate_limit": True,
                     "exists": False})
         return()
 
@@ -40,18 +40,18 @@ async def snapchat(phone, country_code, client, out):
         status = response.json()["status_code"]
         if status=="TAKEN_NUMBER":
             out.append({"name": name,"domain":domain,"method":method,"frequent_rate_limit":frequent_rate_limit,
-                        "rateLimit": False,
+                        "rate_limit": False,
                         "exists": True})
         elif status=="OK":
             out.append({"name": name,"domain":domain,"method":method,"frequent_rate_limit":frequent_rate_limit,
-                        "rateLimit": False,
+                        "rate_limit": False,
                         "exists": False})
 
         else:
             out.append({"name": name,"domain":domain,"method":method,"frequent_rate_limit":frequent_rate_limit,
-                        "rateLimit": True,
+                        "rate_limit": True,
                         "exists": False})
     except:
         out.append({"name": name,"domain":domain,"method":method,"frequent_rate_limit":frequent_rate_limit,
-                    "rateLimit": True,
+                    "rate_limit": True,
                     "exists": False})

@@ -4,13 +4,6 @@ import pkgutil
 import httpx
 import trio
 
-from holehe.instruments import TrioProgress
-
-DEBUG = False
-
-__version__ = "1.60.3"
-
-
 def import_submodules(package, recursive=True):
     """Get all the holehe submodules"""
     if isinstance(package, str):
@@ -43,7 +36,7 @@ async def launch_module(module, phone, country_code, client, out):
     except:
         name = str(module).split('<function ')[1].split(' ')[0]
         out.append({"name": name, "domain": data[name],
-                    "rateLimit": True,
+                    "rate_limit": True,
                     "exists": False})
 
 
@@ -57,12 +50,9 @@ async def maincore(phone, country_code):
 
     # Launching the modules
     out = []
-    instrument = TrioProgress(len(websites))
-    trio.lowlevel.add_instrument(instrument)
     async with trio.open_nursery() as nursery:
         for website in websites:
             nursery.start_soon(launch_module, website, phone, country_code, client, out)
-    trio.lowlevel.remove_instrument(instrument)
 
     # Sort by modules names
     out = sorted(out, key=lambda i: i['name'])

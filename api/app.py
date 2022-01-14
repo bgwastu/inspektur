@@ -1,5 +1,6 @@
 import json
 import os
+import re
 
 from flask import Flask, request, jsonify
 
@@ -19,62 +20,39 @@ def hello_world():
     return jsonify({'status': 'success', 'message': 'Hello, inspektur!'})
 
 
-@app.route('/check/breach', methods=['POST'])
-async def check_breach():
-    """
-    Check breached account using email (cekdata).
-    """
+@app.route('/check', methods=['POST'])
+async def check():
     try:
         email = json.loads(request.data)['email']
-        out = data_breach.periksa_data(email)
-        return jsonify(out)
-    except Exception as e:
-        out = {'status': 'error', 'message': str(e)}
-        return jsonify(out), 400
-
-
-@app.route('/check/phonenumber', methods=['POST'])
-async def check_phonenumber():
-    """
-    Check possible instagram and snapchat account using ignorant.
-    ONLY WORKS FOR INDONESIA PHONE NUMBER
-    """
-    try:
         number = json.loads(request.data)['number']
+        out = {}
+        if email is not None:
+            # Check email
+            email_regex = re.compile(r'([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+')
+            if not email_regex.match(email):
+                out = {'status': 'error', 'message': 'Invalid email address'}
+                return jsonify(out), 400
 
-        # Check if phone number is valid
-        if len(number) < 10:
-            out = {'status': 'error', 'message': 'Invalid phone number'}
-            return jsonify(out), 400
+            out['email'] = holehe.find_all(email)
+            out['breach'] = data_breach.periksa_data(email)
 
-        # Get country code
-        country_code = '62'
+        if number is not None:
+            # Check phone number
+            if len(number) < 10:
+                out = {'status': 'error', 'message': 'Invalid phone number'}
+                return jsonify(out), 400
 
-        operator = mobile_operator.check_mobile_operator(number)
-        out = ignorant.find_all(number.replace('+62', ''), country_code)
+            operator = mobile_operator.check_mobile_operator(number)
+            datas = ignorant.find_all(number.replace('+62', ''), '62')
 
-        # Telegram
-        telegram_info = await telegram.get_info(number)
+            out['telegram'] = await telegram.get_info(number)
+            out['phone_number'] = ({
+                'operator': operator,
+                'datas': datas
+            })
 
-        return ({
-            'operator': operator,
-            **telegram_info,
-            'data': out
-        })
-    except Exception as e:
-        out = {'status': 'error', 'message': str(e)}
-        return jsonify(out), 400
+        return jsonify(out), 200
 
-
-@app.route('/check/email', methods=['POST'])
-async def account_check():
-    """
-    Check possible account using email (holehe).
-    """
-    try:
-        email = json.loads(request.data)['email']
-        out = holehe.find_all(email)
-        return jsonify(out)
     except Exception as e:
         out = {'status': 'error', 'message': str(e)}
         return jsonify(out), 400
