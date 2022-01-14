@@ -5,7 +5,7 @@ export interface Payload {
 
 export interface Telegram {
     id: number;
-    status: string;
+    status: TelegramStatus;
     username: string;
     last_online: Date;
 }
@@ -17,14 +17,18 @@ export interface SocialMedia {
     frequent_rate_limit: string;
     rate_limit: boolean;
     exists: boolean;
+    email_recovery: null;
+    phone_number: null;
+    others: null;
 }
 
 export interface PhoneNumber {
     operator: string;
-    data: SocialMedia[];
+    datas: SocialMedia[];
 }
 
 export interface Breach {
+    img: string;
     title: string;
     date: string;
     breached_data: string;
@@ -34,6 +38,15 @@ export interface Breach {
 export interface ResponseData {
     email: SocialMedia[],
     phone_number: PhoneNumber,
-    breaches: Breach[],
+    breach: Breach[],
     telegram: Telegram,
+}
+
+enum TelegramStatus {
+    EMPTY = 'UserStatusEmpty',
+    ONLINE = 'UserStatusOnline',
+    OFFLINE = 'UserStatusOffline',
+    LAST_WEEK = 'UserStatusLastWeek',
+    LAST_MONTH = 'UserStatusLastMonth',
+    RECENTLY = 'UserStatusRecently',
 }

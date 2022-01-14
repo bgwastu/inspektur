@@ -23,14 +23,22 @@ function App() {
         errorMessage: '',
     });
 
-    function onSubmit(payload: Payload) {
+    function onSubmit(payload: Payload, emailVisibility: boolean, phoneVisibility: boolean) {
+        if(payload.email === '' || !emailVisibility){
+            payload.email = null;
+        }
+
+        let phone: string | null = '+62' + payload.phone;
+        if(payload.phone === '' || !phoneVisibility){
+            phone = null;
+        }
 
         setState({...state, isLoading: true});
         fetch(config.API_URL + '/check', {
             method: 'POST',
             body: JSON.stringify({
                 email: payload.email,
-                number: '+62' + payload.phone,
+                number: phone,
             }),
         }).then((res) => {
             // If code is not 200 then throw error
@@ -39,7 +47,7 @@ function App() {
                     isLoading: false,
                     isFinished: false,
                     isError: true,
-                    errorMessage: res.body?.toString() ?? 'Gagal mengambil data',
+                    errorMessage: 'Gagal mengambil data',
                 });
             } else {
                 res.json().then((data) => {
@@ -55,22 +63,37 @@ function App() {
         });
     }
 
+
+    function goBack() {
+        setState({
+            isLoading: false,
+            isFinished: false,
+            isError: false,
+            errorMessage: '',
+        });
+    }
+
     return (
         <>
             <CssBaseline/>
             <Grid container
-                  direction="column"
+                  direction="row"
                   justifyContent="center"
                   alignItems="center"
                   sx={{
                       height: '100vh',
+                      width: '100wh',
+                      maxWidth: '100%',
+                      maxHeight: '100%',
                       padding: '10px'
                   }}
 
             >
                 <Grid
                     item
-                    xs={6}
+                    xs={12}
+                    sm={8}
+                    md={5}
                     sx={{
                         display: 'flex',
                         flexDirection: 'column',
@@ -79,10 +102,10 @@ function App() {
                     gap={1}
                 >
                     <Header/>
-                    {state.isFinished ? <Result/> : <MainForm onSubmit={onSubmit} state={state}/>}
+                    {state.isFinished && state.response? <Result goBack={goBack} data={state.response}/> : <MainForm onSubmit={onSubmit} state={state}/>}
                 </Grid>
             </Grid>
-            <ErrorDialog setState={setState} state={state}/>
+            <ErrorDialog setState={setState} state={state} />
         </>
     );
 }

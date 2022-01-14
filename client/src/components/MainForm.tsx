@@ -9,7 +9,7 @@ import {Payload} from '../types';
 
 interface Props {
     state: State;
-    onSubmit: (values: Payload) => void;
+    onSubmit: (values: Payload, emailVisibility: boolean, phoneVisibility: boolean) => void;
 }
 
 function MainForm(props: Props) {
@@ -18,11 +18,11 @@ function MainForm(props: Props) {
 
     const formik = useFormik<Payload>({
         initialValues: {
-            email: null,
-            phone: null,
+            email: '',
+            phone: '',
         },
         onSubmit: (values, _) => {
-            props.onSubmit(values);
+            props.onSubmit(values, emailVisibility, phoneVisibility);
         },
         validate: (payload: Payload) => {
             let errors: Partial<Payload> = {};
