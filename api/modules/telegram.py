@@ -1,11 +1,8 @@
 import os
 
-from dotenv import load_dotenv
 from telethon import TelegramClient
 from telethon.tl.functions.contacts import ImportContactsRequest, DeleteContactsRequest
 from telethon.tl.types import InputPhoneContact
-
-load_dotenv()
 
 TELEGRAM_API_ID = int(os.environ.get('TELEGRAM_API_ID'))
 TELEGRAM_API_HASH = os.environ.get('TELEGRAM_API_HASH')
