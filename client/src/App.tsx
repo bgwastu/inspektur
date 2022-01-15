@@ -1,7 +1,7 @@
 import React from 'react';
 import config from './config';
 import {Payload, ResponseData} from './types';
-import {CssBaseline, Grid} from '@mui/material';
+import {Box, CssBaseline, Grid} from '@mui/material';
 import Header from './components/Header';
 import Result from './components/Result';
 import MainForm from './components/MainForm';
@@ -80,9 +80,9 @@ function App() {
             <Grid container
                   direction="row"
                   justifyContent="center"
-                  alignItems="center"
+                  alignItems="stretch"
                   sx={{
-                      height: '90vh',
+                      height: '100vh',
                       width: '100wh',
                       maxWidth: '100%',
                       maxHeight: '100%',
@@ -102,12 +102,20 @@ function App() {
                     }}
                     gap={1}
                 >
+                    <Box sx={{
+                        flexGrow: 1,
+                    }}/>
                     <Header/>
-                    {state.isFinished && state.response ? <Result goBack={goBack} data={state.response}/> :
-                        <MainForm onSubmit={onSubmit} state={state}/>}
+                    <Box
+                        sx={{
+                            flexGrow: 1
+                        }}>
+                        {state.isFinished && state.response ? <Result goBack={goBack} data={state.response}/> :
+                            <MainForm onSubmit={onSubmit} state={state}/>}
+                    </Box>
+                    <Footer/>
                 </Grid>
             </Grid>
-            <Footer/>
             <ErrorDialog setState={setState} state={state}/>
         </>
     );
