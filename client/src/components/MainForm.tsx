@@ -53,6 +53,7 @@ function MainForm(props: Props) {
             display: 'flex',
             flexDirection: 'row',
             justifyContent: 'center',
+            marginBottom: '10px'
         }}>
             <FormControlLabel control={
                 <Checkbox

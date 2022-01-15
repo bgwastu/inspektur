@@ -1,7 +1,7 @@
 import React from 'react';
 import config from './config';
 import {Payload, ResponseData} from './types';
-import {Box, CssBaseline, Grid, Stack} from '@mui/material';
+import {CssBaseline, Grid} from '@mui/material';
 import Header from './components/Header';
 import Result from './components/Result';
 import MainForm from './components/MainForm';

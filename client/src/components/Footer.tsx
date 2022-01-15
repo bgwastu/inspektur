@@ -1,4 +1,4 @@
-import {Box, Button, IconButton, Link} from '@mui/material';
+import {Box, IconButton, Link} from '@mui/material';
 import GitHubIcon from '@mui/icons-material/GitHub';
 function Footer() {
     return <Box
