@@ -1,11 +1,12 @@
 import React from 'react';
 import config from './config';
 import {Payload, ResponseData} from './types';
-import {CssBaseline, Grid} from '@mui/material';
+import {Box, CssBaseline, Grid, Stack} from '@mui/material';
 import Header from './components/Header';
 import Result from './components/Result';
 import MainForm from './components/MainForm';
 import ErrorDialog from './components/ErrorDialog';
+import Footer from './components/Footer';
 
 export interface State {
     isLoading: boolean;
@@ -81,7 +82,7 @@ function App() {
                   justifyContent="center"
                   alignItems="center"
                   sx={{
-                      height: '100vh',
+                      height: '90vh',
                       width: '100wh',
                       maxWidth: '100%',
                       maxHeight: '100%',
@@ -106,6 +107,7 @@ function App() {
                         <MainForm onSubmit={onSubmit} state={state}/>}
                 </Grid>
             </Grid>
+            <Footer/>
             <ErrorDialog setState={setState} state={state}/>
         </>
     );
