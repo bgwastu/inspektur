@@ -14,7 +14,7 @@ import {
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import PhoneIcon from '@mui/icons-material/Phone';
-import React, {useState} from 'react';
+import React from 'react';
 import {ResponseData} from '../types';
 import {formatRelative} from 'date-fns';
 import {id} from 'date-fns/locale';
@@ -31,21 +31,14 @@ function getFavicon(domain: string): string {
 }
 
 const Result = (props: Props) => {
-    const [expanded, setExpanded] = useState<string | false>(false);
-
     const {email, phone_number, breach, telegram} = props.data;
-
-    const handleChange =
-        (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
-            setExpanded(isExpanded ? panel : false);
-        };
 
     if (!email && !phone_number && !breach && !telegram) {
         return (
             <Stack
                 direction="column"
                 justifyContent="center"
-                alignItems="center"
+                alignItems="stretch"
                 marginTop={10}
             >
 
@@ -66,22 +59,21 @@ const Result = (props: Props) => {
         <Box
             display="flex"
             flexDirection="column"
-            alignItems="center"
+            alignItems="stretch"
             justifyContent="center"
         >
-            <Button variant="outlined" color="primary" sx={{marginBottom: '16px'}} onClick={() =>
-                props.goBack()
-            }>
-                Kembali
-            </Button>
+            <Box
+                display="flex"
+                justifyContent="center"
+            >
+                <Button variant="outlined" color="primary" sx={{marginBottom: '16px'}} onClick={() =>
+                    props.goBack()
+                }>
+                    Kembali
+                </Button>
+            </Box>
             <Box>
-                <Accordion
-                    expanded={expanded === 'email'}
-                    onChange={handleChange('email')}
-                    sx={{
-                        display: email.length < 1 ? 'block' : 'none',
-                    }}
-                >
+                <Accordion disabled={!email || email?.length < 1}>
                     <AccordionSummary
                         expandIcon={<ExpandMoreIcon/>}
                         aria-controls="panel1bh-content"
@@ -91,7 +83,7 @@ const Result = (props: Props) => {
                             Email
                         </Typography>
                         <Typography
-                            sx={{color: 'text.secondary'}}>{'Terdapat ' + email?.length + ' akun yang terdaftar'}</Typography>
+                            sx={{color: 'text.secondary'}}>{email && email?.length > 1 ? 'Terdapat ' + email?.length + ' akun yang terdaftar': 'Tidak ada data'}</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
                         <Grid container spacing={2} direction="row" alignItems="space-around">
@@ -113,11 +105,7 @@ const Result = (props: Props) => {
                     </AccordionDetails>
                 </Accordion>
                 <Accordion
-                    sx={{
-                        display: phone_number ? 'block' : 'none',
-                    }}
-                    expanded={expanded === 'panel2'}
-                    onChange={handleChange('panel2')}>
+                    disabled={!phone_number}>
                     <AccordionSummary
                         expandIcon={<ExpandMoreIcon/>}
                         aria-controls="panel2bh-content"
@@ -125,7 +113,7 @@ const Result = (props: Props) => {
                     >
                         <Typography sx={{width: '33%', flexShrink: 0}}>No Telepon</Typography>
                         <Typography sx={{color: 'text.secondary'}}>
-                            {'Terdapat ' + phone_number?.datas?.length + ' akun yang terdaftar'}
+                            {phone_number ? 'Terdapat ' + phone_number?.datas?.length + ' akun yang terdaftar' : 'Tidak ada data'}
                         </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
@@ -159,11 +147,7 @@ const Result = (props: Props) => {
                     </AccordionDetails>
                 </Accordion>
                 <Accordion
-                    sx={{
-                        display: telegram?.id ?? false ? 'block' : 'none',
-                    }}
-                    expanded={expanded === 'panel3'}
-                    onChange={handleChange('panel3')}>
+                    disabled={!telegram?.id}>
                     <AccordionSummary
                         expandIcon={<ExpandMoreIcon/>}
                         aria-controls="panel3bh-content"
@@ -173,7 +157,7 @@ const Result = (props: Props) => {
                             Telegram
                         </Typography>
                         <Typography sx={{color: 'text.secondary'}}>
-                            {'Info akun Telegram'}
+                            {telegram?.id ? 'Info akun Telegram': 'Tidak ada data'}
                         </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
@@ -205,11 +189,7 @@ const Result = (props: Props) => {
                     </AccordionDetails>
                 </Accordion>
                 <Accordion
-                    sx={{
-                        display: breach ? 'block' : 'none',
-                    }}
-
-                    expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
+                    disabled={!breach}>
                     <AccordionSummary
                         expandIcon={<ExpandMoreIcon/>}
                         aria-controls="panel4bh-content"
@@ -217,7 +197,7 @@ const Result = (props: Props) => {
                     >
                         <Typography sx={{width: '33%', flexShrink: 0}}>Data Bocor</Typography>
                         <Typography sx={{color: 'text.secondary'}}>
-                            {'Terdapat ' + breach?.length + ' data yang bocor'}
+                            {breach ?'Terdapat ' + breach?.length + ' data yang bocor': 'Tidak ada data'}
                         </Typography>
                     </AccordionSummary>
                     <AccordionDetails>

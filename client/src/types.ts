@@ -36,10 +36,10 @@ export interface Breach {
 }
 
 export interface ResponseData {
-    email: SocialMedia[],
-    phone_number: PhoneNumber,
-    breach: Breach[],
-    telegram: Telegram,
+    email?: SocialMedia[],
+    phone_number?: PhoneNumber,
+    breach?: Breach[],
+    telegram?: Telegram,
 }
 
 enum TelegramStatus {

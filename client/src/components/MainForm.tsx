@@ -1,5 +1,5 @@
 import React from 'react';
-import {Box, Checkbox, FormControlLabel, FormGroup, InputAdornment, TextField} from '@mui/material';
+import {Box, Checkbox, FormControlLabel, FormGroup, InputAdornment, Stack, TextField} from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
 import {Search} from '@mui/icons-material';
 import {useFormik} from 'formik';
@@ -48,7 +48,7 @@ function MainForm(props: Props) {
     });
 
 
-    return (<>
+    return (<Stack>
         <FormGroup sx={{
             display: 'flex',
             flexDirection: 'row',
@@ -116,7 +116,7 @@ function MainForm(props: Props) {
                 {props.state.isLoading ? 'Mohon tunggu sebentar...' : 'Selidik'}
             </LoadingButton>
         </Box>
-    </>);
+    </Stack>);
 }
 
 export default MainForm;
