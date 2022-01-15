@@ -11,7 +11,14 @@ interface Props {
 function ErrorDialog(props: Props) {
     return <Dialog
         open={props.state.isError}
-        onClose={() => props.setState({...props.state, isError: false, errorMessage: ''})}
+        onClose={() => props.setState(
+            {
+                isLoading: false,
+                isFinished: false,
+                isError: false,
+                errorMessage: '',
+            }
+        )}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
     >
@@ -24,7 +31,12 @@ function ErrorDialog(props: Props) {
             </DialogContentText>
         </DialogContent>
         <DialogActions>
-            <Button onClick={() => props.setState({...props.state, isError: false, errorMessage: ''})}>Tutup</Button>
+            <Button onClick={() => props.setState({
+                isLoading: false,
+                isFinished: false,
+                isError: false,
+                errorMessage: '',
+            })}>Tutup</Button>
         </DialogActions>
     </Dialog>;
 }
