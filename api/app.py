@@ -2,7 +2,9 @@ import json
 import os
 import re
 
+from dotenv import load_dotenv
 from flask import Flask, request, jsonify
+from telethon.errors import FloodWaitError
 
 import holehe.core as holehe
 import ignorant.core as ignorant
@@ -13,12 +15,11 @@ from flask_cors import CORS
 
 app = Flask(__name__)
 CORS(app)
-
+load_dotenv()
 
 @app.route('/')
 def hello_world():
     return jsonify({'status': 'success', 'message': 'Hello, inspektur!'})
-
 
 @app.route('/check', methods=['POST'])
 async def check():

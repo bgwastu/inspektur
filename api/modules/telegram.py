@@ -1,21 +1,33 @@
 import os
+from urllib import request
 
+from dotenv import load_dotenv
 from telethon import TelegramClient
+from telethon.errors import FloodWaitError
 from telethon.tl.functions.contacts import ImportContactsRequest, DeleteContactsRequest
 from telethon.tl.types import InputPhoneContact
 
+load_dotenv()
+
 TELEGRAM_API_ID = int(os.environ.get('TELEGRAM_API_ID'))
 TELEGRAM_API_HASH = os.environ.get('TELEGRAM_API_HASH')
-TELEGRAM_PHONE_NUMBER = os.environ.get('TELEGRAM_PHONE_NUMBER')
+TELEGRAM_SESSION_URL = os.environ.get('TELEGRAM_SESSION_URL')
+
+
+async def get_telegram_client() -> TelegramClient:
+    file_name, _ = request.urlretrieve(TELEGRAM_SESSION_URL, 'login.session')
+    return TelegramClient(
+        os.path.abspath(file_name),
+        api_id=TELEGRAM_API_ID,
+        api_hash=TELEGRAM_API_HASH
+    )
 
 
 async def get_info(phone_number):
-    async with TelegramClient(TELEGRAM_PHONE_NUMBER, TELEGRAM_API_ID, TELEGRAM_API_HASH) as client:
-        await client.connect()
-        if not await client.is_user_authorized():
-            await client.send_code_request(TELEGRAM_PHONE_NUMBER)
-            await client.sign_in(TELEGRAM_PHONE_NUMBER, input('Enter the code (sent on telegram): '))
+    client = await get_telegram_client()
+    await client.connect()
 
+    async with client:
         try:
             contact = InputPhoneContact(client_id=0, phone=phone_number, first_name='', last_name='')
             contacts = await client(ImportContactsRequest([contact]))
