@@ -11,6 +11,6 @@
     "ENV IS_DEBUG=False",
     "ENV HOST 0.0.0.0",
     "EXPOSE 5000",
-    "CMD [\"python\", \"app.py\"]"
+    "CMD [\"waitress-serve\", \"--listen=*:5000\", \"app:app\"]"
   ]
 }

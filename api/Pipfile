@@ -34,6 +34,7 @@ async_generator = "==1.10"
 telethon = "*"
 python-dotenv = "*"
 flask-cors = "*"
+waitress = "*"
 
 [dev-packages]
 autopep8 = "*"
