@@ -1,5 +1,5 @@
 const config = {
-    'API_URL': 'http://192.168.239.9:5000'
+    'API_URL': 'https://inspektur-api.app.wastu.dev'
 };
 
 export default config;
