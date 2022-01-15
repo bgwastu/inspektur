@@ -23,6 +23,10 @@ async def get_telegram_client() -> TelegramClient:
     )
 
 
+def connect():
+    TelegramClient('login.session', TELEGRAM_API_ID, TELEGRAM_API_HASH).start()
+
+
 async def get_info(phone_number):
     client = await get_telegram_client()
     await client.connect()
@@ -52,3 +56,7 @@ async def get_info(phone_number):
             return None
         except TypeError:
             return None
+
+
+if __name__ == '__main__':
+    connect()
