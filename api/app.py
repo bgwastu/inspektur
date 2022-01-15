@@ -61,7 +61,7 @@ async def check():
                 'datas': datas
             })
 
-            if len(phone_data['datas']) > 1:
+            if len(phone_data['datas']) > 0:
                 out['phone_number'] = phone_data
 
         return jsonify(out), 200
