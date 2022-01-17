@@ -94,7 +94,7 @@ Kontribusi sangat dibutuhkan untuk aplikasi ini, pull request terbuka untuk umum
 # Lisensi & Atribusi
 - [GNU General Public License v3.0](LICENSE)
 - [Ignorant (GPLv3)](https://github.com/megadose/ignorant)
-- [Holehe (GPLv3)](https://github.com/megadose/ignorant)
+- [Holehe (GPLv3)](https://github.com/megadose/holehe)
 - [Periksa Data](https://periksadata.com)
 
 Gambar dan icon dari aplikasi didapatkan dari [Flaticon](https://www.flaticon.com)
